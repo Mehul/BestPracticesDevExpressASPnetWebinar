@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="StickyFooter3.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="Content/demo2.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="mainArea">
+            <div class="headerHolder">
+                <a href="http://devexpress.com/">
+                    <img src="Content/DXLogo.png" /></a>
+            </div>
+            <div class="contentHolder">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <div class="footerHolder">
+            <h2>Your Next Great Web App Starts Here</h2>
+            <p>
+                Download your free <a href="http://www.devexpress.com/Downloads/NET/DXperience/" target="_blank">30 day trial</a> of ASP.NET Controls today
+            </p>
+        </div>
+    </form>
+</body>
+</html>

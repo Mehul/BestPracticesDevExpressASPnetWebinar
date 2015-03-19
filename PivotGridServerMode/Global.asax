@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="PivotGridServerMode.Global_asax" Language="C#" %>

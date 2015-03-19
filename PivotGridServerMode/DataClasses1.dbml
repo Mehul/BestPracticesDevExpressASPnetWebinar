@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PivotGridDemoDB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\PivotGridDemoDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PivotGridDemoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category">
+      <Column Name="OID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CategoryName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Category_Product" Member="Products" ThisKey="OID" OtherKey="Category" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SalesPeople" Member="SalesPeoples">
+    <Type Name="SalesPeople">
+      <Column Name="OID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SalesPersonName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="SalesPeople_Order" Member="Orders" ThisKey="OID" OtherKey="SalesPerson" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="OID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Customer_Order" Member="Orders" ThisKey="OID" OtherKey="Customer" Type="Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="OID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SalesPerson" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Customer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Order_Sale" Member="Sales" ThisKey="OID" OtherKey="Order" Type="Sale" />
+      <Association Name="Customer_Order" Member="Customer1" ThisKey="Customer" OtherKey="OID" Type="Customer" IsForeignKey="true" />
+      <Association Name="SalesPeople_Order" Member="SalesPeople" ThisKey="SalesPerson" OtherKey="OID" Type="SalesPeople" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Products" Member="Products">
+    <Type Name="Product">
+      <Column Name="OID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Category" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Product_Sale" Member="Sales" ThisKey="OID" OtherKey="Product" Type="Sale" />
+      <Association Name="Category_Product" Member="Category1" ThisKey="Category" OtherKey="OID" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sales" Member="Sales">
+    <Type Name="Sale">
+      <Column Name="OID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Product" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="Order_Sale" Member="Order1" ThisKey="Order" OtherKey="OID" Type="Order" IsForeignKey="true" />
+      <Association Name="Product_Sale" Member="Product1" ThisKey="Product" OtherKey="OID" Type="Product" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

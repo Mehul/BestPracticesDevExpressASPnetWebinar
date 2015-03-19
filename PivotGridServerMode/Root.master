@@ -1,0 +1,89 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Root.master.cs" Inherits="PivotGridServerMode.RootMaster" %>
+
+<%-- DXCOMMENT: Page Root.master is a master page that contains the root layout (it includes Header, Cental Area, and Footer) --%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="Content/Site.css" />
+</head>
+<body runat="server" id="Body">
+    <form id="form1" runat="server">
+        <dx:ASPxPanel ID="HeaderPane" runat="server" FixedPosition="WindowTop" ClientInstanceName="headerPane" CssClass="headerPane" Collapsible="true">
+            <SettingsAdaptivity CollapseAtWindowInnerWidth="500" />
+            <Styles>
+                <Panel CssClass="panel"></Panel>
+                <ExpandBar CssClass="bar"></ExpandBar>
+            </Styles>
+            <PanelCollection>
+                <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
+                        <div class="headerTop">
+                            <div class="templateTitle">
+                                <a id="TitleLink" href="~/" runat="server">Project Title</a>
+                            </div>
+                            <div class="loginControl">
+                                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                                    <AnonymousTemplate>
+                                        <a href="~/Account/Login.aspx" runat="server" id="loginLink">Log In</a> 
+                                        | 
+                                        <a href="~/Account/Register.aspx" runat="server" id="registerLink">Register</a>
+                                    </AnonymousTemplate>
+                                    <LoggedInTemplate>
+                                        Welcome <span class="bold">
+                                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                                        </span>! [
+                                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out"
+                                            LogoutPageUrl="~/" />
+                                        ]
+                                    </LoggedInTemplate>
+                                </asp:LoginView>
+                            </div>
+                        </div>
+                        <div class="headerMenu">
+                            <%-- DXCOMMENT: Configure the header menu --%>
+<dx:ASPxMenu ID="ASPxMenu1" runat="server" ItemAutoWidth="False" Width="100%" DataSourceID="XmlDataSourceHeader">
+    <Border BorderWidth="0px" />
+    <BorderTop BorderWidth="1px" />
+</dx:ASPxMenu>
+
+
+                        </div>
+                </dx:PanelContent>
+            </PanelCollection>
+            <ExpandedPanelTemplate>
+                <div class="headerMenu">
+                    <%-- DXCOMMENT: Configure the header menu --%>
+<dx:ASPxMenu ID="ASPxMenu1" runat="server" ItemAutoWidth="False" Width="100%" Orientation="Vertical" DataSourceID="XmlDataSourceHeader">
+    <Border BorderWidth="0px" />
+</dx:ASPxMenu>
+
+
+                </div>
+            </ExpandedPanelTemplate>
+            <ExpandBarTemplate>
+                <div class="templateTitle">
+                    <a id="TitleLink" href="~/" runat="server">Project Title</a>
+                </div>
+            </ExpandBarTemplate>
+        </dx:ASPxPanel>
+
+        <dx:ASPxPanel ID="MainPane" runat="server" CssClass="mainContentPane">
+            <PanelCollection>
+                <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
+                    <asp:ContentPlaceHolder ID="Content" runat="server" />
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
+
+
+    
+<%-- DXCOMMENT: Configure a datasource for the header menu --%>
+<asp:XmlDataSource ID="XmlDataSourceHeader" runat="server" DataFile="~/App_Data/TopMenu.xml"
+    XPath="/items/*"></asp:XmlDataSource>
+
+    
+    </form>
+</body>
+</html>
